@@ -1,19 +1,25 @@
+import Label from "./label";
+
+// Form Component
 export default function Form(props){
-    const {htmlFor,legend,method,action,type,value,text} = props;
+    const {htmlFor,label,method,action,type,value,text} = props;
     return (
     <fieldset>
-        <label
-        htmlFor={htmlFor}
-        legend={legend}
-        >
-        {legend}
-        </label>
+        <label htmlFor={htmlFor} label={label}> {label} </label>
         <form method={method} action={action}>
-        <input
-        type='submit'
-        value={value}
-        />
+        <Label/>
+        <Checkbox/>
+        <Input/>
+        <Radio/>
+        <Textarea/>
+
+        <input type='submit' value={value} />
         </form>
+    
+    
     </fieldset>
 );
 }
+
+
+

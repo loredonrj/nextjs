@@ -2,6 +2,7 @@
 export default function Checkbox (props) {
     const {htmlFor,label,id,name,value,required,type} = props;
      return (
+      <>
        <label
         htmlFor={htmlFor}
         label={label}
@@ -15,5 +16,6 @@ export default function Checkbox (props) {
         />
         {label}
        </label>
+      </>
      );
    }
