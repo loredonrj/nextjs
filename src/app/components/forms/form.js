@@ -1,4 +1,10 @@
 import Label from "./label";
+import Checkbox from "./checkbox";
+import Input from "./input";
+import Radio from "./radio";
+import Textarea from "./textarea";
+import Select from "./select";
+import Datalist from "./datalist";
 
 // Form Component
 export default function Form(props){
@@ -12,11 +18,10 @@ export default function Form(props){
         <Input/>
         <Radio/>
         <Textarea/>
-
+        <Select/>
+        <Datalist/>
         <input type='submit' value={value} />
         </form>
-    
-    
     </fieldset>
 );
 }
