@@ -1,9 +1,8 @@
 // Create component for radio input
 export default function Radio(props) {
-    const {htmlFor, label, id, name, required, type } = props;
+    const {htmlFor, label, id, name, value, required, type } = props;
 
      return (
-      <fieldset>
        <label
         htmlFor={htmlFor}
         label={label}
@@ -11,11 +10,10 @@ export default function Radio(props) {
         <input
          id={htmlFor}
          name={name || null}
-         required={required || null}
+        value ={value}
          type='radio'
         />
         {label}
        </label>
-      </fieldset>
      );
    }

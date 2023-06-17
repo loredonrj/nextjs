@@ -8,6 +8,7 @@ export default function Input(props) {
         htmlFor={htmlFor}
         label={label}
        />
+        {label}
         <input
          id={htmlFor}
          maxlength={maxlength || null}
@@ -19,7 +20,6 @@ export default function Input(props) {
          size={size}
          type={type || 'text'}
         />
-        {label}
       </>
      );
    }
