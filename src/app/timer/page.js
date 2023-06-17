@@ -1,7 +1,7 @@
 'use client'
 import React, {useState, useEffect} from 'react';
 
-export default function Timer() {
+  export default function Timer() {
     const [counter, setCounter] = useState(20);
   
     useEffect(() => {
