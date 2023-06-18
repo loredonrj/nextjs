@@ -7,6 +7,16 @@ import Input from "../components/forms/input";
 import Radio from "../components/forms/radio";
 
 export default function App() {
+  return(
+  <div>
+  <SameForAll/>
+  <EnterSameValue />
+
+  </div>
+)};
+
+
+function SameForAll(){
 
   const [selected, setSelected] = useState("");
   const changeHandler = e => {
@@ -15,7 +25,6 @@ export default function App() {
 
 return (
   <>
-  <fieldset>
     <h3>Homework</h3>
     <section>
     <input type="radio" name="choice" value="same-for-all" checked={selected === "same-for-all"}
@@ -45,10 +54,8 @@ return (
     <div aria-hidden={selected !== "set-particular" ? true : false}>
     </div>
     </section>
-    <EnterSameValue />
-</fieldset>
 </>
-)};
+)}
 
 // SET INPUT FIELDS_________________________________________________
 function EnterSameValue() {
