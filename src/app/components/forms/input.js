@@ -1,6 +1,6 @@
 // Create component for input
 export default function Input(props) {
-    const {haslabel,htmlFor,label,id,maxlength,minlength,name,placeholder,required,step,size,type} = props;
+    const {haslabel,htmlFor,label,id,maxLength,minLength,name,placeholder,required,step,size,type} = props;
      return (
       <>
        <label
@@ -11,8 +11,8 @@ export default function Input(props) {
         {label}
         <input
          id={htmlFor}
-         maxlength={maxlength || null}
-         minlength={minlength || null}
+         maxLength={maxLength || null}
+         minLength={minLength || null}
          name={name || null}
          placeholder={placeholder || null}
          required={required || null}

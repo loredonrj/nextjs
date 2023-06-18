@@ -1,3 +1,5 @@
+'use client'
+import React from 'react';
 import Label from "./label";
 import Checkbox from "./checkbox";
 import Input from "./input";
@@ -10,8 +12,8 @@ import Datalist from "./datalist";
 export default function Form(props){
     const {htmlFor,label,method,action,type,value,text} = props;
     return (
+    <>
     <fieldset>
-        <label htmlFor={htmlFor} label={label}> {label} </label>
         <form method={method} action={action}>
         <Label/>
         <Checkbox/>
@@ -23,6 +25,7 @@ export default function Form(props){
         <input type='submit' value={value} />
         </form>
     </fieldset>
+    </>
 );
 }
 

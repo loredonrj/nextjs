@@ -1,5 +1,5 @@
 // Create component for textarea
-export default function Textarea() {
+export default function Textarea(props) {
     const {hasLabel,htmlFor,label,cols,id,name,required,rows,} = props;
      return (
         <>

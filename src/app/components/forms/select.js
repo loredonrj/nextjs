@@ -5,7 +5,7 @@ export default function Select(props) {
     const {key,value,haslabel,htmlFor,label,defaultValue,id,name,required,disabled,options} = props;
      
     // Get all options from option prop
-     const selectOptions = {options}.split(', ');
+     const selectOptions = this.props.options.split(', ');
    
      // Generate list of options
      const selectOptionsList = selectOptions.map((selectOption, index) => {
