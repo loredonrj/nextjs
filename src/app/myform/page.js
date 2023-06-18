@@ -1,12 +1,14 @@
 
 'use client'
-import React, { useState } from "react";
+import React, { useState, Use } from "react";
 import '../styles.css'
 import Checkbox from '../components/forms/checkbox';
 import Input from "../components/forms/input";
 import Radio from "../components/forms/radio";
 
 export default function App() {
+
+
   return(
   <div>
   <SameForAll/>
@@ -17,11 +19,12 @@ export default function App() {
 
 
 function SameForAll(){
-
   const [selected, setSelected] = useState("");
+
   const changeHandler = e => {
     setSelected(e.target.value);
   };
+
 
 return (
   <>
@@ -78,7 +81,7 @@ function EnterSameValue() {
 //RENDER INPUT FIELDS with Same Value
   return (
     <div >
-      <input name="same-value" label='Enter Same Value' onChange={handleInputChange} />
+      <input aria-hidden={true} label='Enter Same Value' onChange={handleInputChange} />
       {showA && <A text={text} />}
       {showB && <B text={text} />}
       {showC && <C text={text} />}
@@ -90,7 +93,7 @@ function EnterSameValue() {
 //Row A
 function A(props) {
   const { text } = props;
-  return <div><input type="checkbox" id="a" name="a" value="a" label="a"/><input name="value-a" label=" " placeholder={text}/> </div>;
+  return <div><input type="checkbox" id="a" name="a" value="" label="a"/><input name="value-a" label=" " placeholder={text}/> </div>;
 }
 
 //Row B
