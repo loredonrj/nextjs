@@ -54,9 +54,6 @@ export default function App() {
   </>
   )}
 
-
-  
-
   // SET INPUT FIELDS_________________________________________________
   function EnterSameValue() {
  
