@@ -41,15 +41,27 @@ Conditon1: If I enter a value inside Component_3, then that value must instantly
 
 Condition 2: When I select Component_2, Component_1 and Component_4 are disabled and the input fields (a, b,c,d) of Component_5, Component_6, Component_7, Component_8 must be enabled.
 
-Condition 3: When i check Component_4 then the checkboxes of Component_5, Component_6, Component_7 and Component_8 must also be checked and the values inside the input fields (a,b,c,d) must be sent to Component_9. Those values must also appear in uppercase format inside Component_9 in the form of an array like [{name:"a", value:"a"},{name:"b", value:"b"},{name:"c", value:"c"},{name:"d", value:"d"},] for example. If their corresponding input fields are empty, that empty value must also appear in Component_9 in the form of an empty object inside an array like so : [{...},{...},{...},{...}].But if i uncheck Component_4, the checkboxes of Component_5, Component_6, Component_7 and Component_8 must be unchecked, the objects representing the input field must be removed from the array of Component_9 and their input fields must be disabled. But if I check it again they shoud reappear as long as they are still present in the input boxes. 
+Condition 3 => Whenever i check Component_4 (SelectAll) :
+- the checkboxes of Component_5, Component_6, Component_7 and Component_8 must also be checked
+- input fields a,b,c,d must be enabled.
+- the values inside the input fields (a,b,c,d) must be sent to Component_9. 
+- those values must also appear in uppercase format inside Component_9 in the form of an array like [{name:"a", value:"a"},{name:"b", value:"b"},{name:"c", value:"c"},{name:"d", value:"d"},] for example.
+- If the values inside the input fields are empty, they must also appear in Component_9 in the form of an empty object inside an array like so : [{...},{...},{...},{...}].
 
-Condition 4 : When I check the checkbox corresponding to Component_5, Component_6, Component_7 or Component_8, if their corresponding input fields are empty, that empty value must also appear in Component_9 in the form of an empty object inside an array like so : [{...},{...},{...},{...}].
+Condition 4 => When i uncheck Component_4 (SelectAll) :
+- the checkboxes of Component_5, Component_6, Component_7 and Component_8 must be unchecked, the objects representing the input field must be removed from the array of Component_9 - - input fields a,b,c,d must be disabled.
 
-Condition 5: When I check one of the checkboxes (a,b,c,d), if their corresponding input fields (a,b,c,d) hold a value, that value must also appear in uppercase format inside Component_9 in the form of an array like [{name:"a", value:"a"},{name:"b", value:"b"},{name:"c", value:"c"},{name:"d", value:"d"},] for example.
+Condition 5 : When I check the checkbox corresponding to Component_5, Component_6, Component_7 or Component_8, if their corresponding input fields are empty, that empty value must also appear in Component_9 in the form of an empty object inside an array like so : [{...},{...},{...},{...}].
 
-Condition 6: If I uncheck Component_4, Component_9 shouldn't display anything.
+Condition 6 => When I check one of the checkboxes (a,b,c,d) :
+- if their corresponding input fields (a,b,c,d) hold a value, that value must also appear in uppercase format inside Component_9 in the form of an array like [{name:"a", value:"a"},{name:"b", value:"b"},{name:"c", value:"c"},{name:"d", value:"d"},] for example.
+- if the corresponding input field is disabled it must be enabled
 
-Condition 7: If i uncheck the checkbok corresponding to either Component_5, Component_6, Component_7 or Component_8, then the entire object representing its input field must be removed from the array of Component_9, but if I check it again it shoud reappear.
+Condition 7 => When I uncheck one of the checkboxes (a,b,c,d) :
+- the entire object representing its input field must be removed from the array of Component_9
+- if the corresponding input field is disabled it must be enabled
+
+Condition 7: If I uncheck Component_4, Component_9 shouldn't display anything.
 
 There sould be no submit button on the form.
 
