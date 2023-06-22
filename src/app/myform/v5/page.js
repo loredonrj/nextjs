@@ -9,32 +9,26 @@ import Input from '@/app/components/forms/input';
 
 export default function Form() {
 
-const [selectAll, setSelectAll] = useState(true);
-
-const [hasInputValue, setHasInputValue] = useState(true);
-
-const [inputValue, setInputValue] = useState('');
-
-const [rows, setRows] = useState([
+  const [rows, setRows] = useState([
     {
         "name": "A",
         "id": 1,
-        "input": ''
+        "input": 0
     },
     {
         "name": "B",
         "id": 2,
-        "input": ''
+        "input": 0
     },
     {
         "name": "C",
         "id": 3,
-        "input": ''
+        "input": 0
     },
     {
         "name": "D",
         "id": 4,
-        "input": ''
+        "input": 0
     },
     
 ]);
@@ -98,12 +92,9 @@ const handleParticularRowValue = (e, id) => {
         row.input = Number(e.target.value);
 
         setSelectedRows([...data]);
-        }
-    }
-};
 
 
-console.log(selectedRows);
+        console.log(selectedRows);
 
 //JSX PART
 
@@ -129,7 +120,6 @@ console.log(selectedRows);
                     }}
                 />
             {item?.name}
-            </div>
             <Input
                 value={constant}
                 disabled={
@@ -146,7 +136,7 @@ console.log(selectedRows);
                     handleParticularRowValue(e, item?.id);
                 }}
             />
+            </div>
         </div>
     );
-})
-    }}
+              }}}}}
