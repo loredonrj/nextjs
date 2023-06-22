@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 export default function Form() {
   const [radioBtn1Selected, setRadioBtn1Selected] = useState(false);
   const [radioBtn2Selected, setRadioBtn2Selected] = useState(false);
-  const [hasInputValue, setHasInputValue] = useState(true);
   const [input3Value, setInput3Value] = useState('');
   const [checkbox4Checked, setCheckbox4Checked] = useState(false);
   const [checkboxes, setCheckboxes] = useState([
@@ -30,7 +29,6 @@ export default function Form() {
   const handleRadioBtn1Change = () => {
     setRadioBtn1Selected(true);
     setRadioBtn2Selected(false);
-    setHasInputValue(true);
     setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, checked: true })));
     setSelectedRows(rows);
   };
@@ -39,7 +37,6 @@ export default function Form() {
   const handleRadioBtn2Change = () => {
     setRadioBtn1Selected(false);
     setRadioBtn2Selected(true);
-    setHasInputValue(false);
     setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, checked: false })));
     setSelectedRows([]);
   };
@@ -51,7 +48,7 @@ export default function Form() {
     setRows(rows.map((row) => ({ ...row, input: e.target.value })));
   };
 
-  // Checkbox4 Change Handler
+    // Select All Checkbox Change Handler
   const handleCheckbox4Change = (e) => {
     const checked = e.target.checked;
     setCheckbox4Checked(checked);
@@ -140,6 +137,12 @@ export default function Form() {
         onChange={handleCheckboxChange(row.name)}
       />
       {row.name}
+      <input
+          type="text"
+          disabled= {checkboxes.find((checkbox) => checkbox.label === row.name)?.checked || false}
+          value={checkboxes.find((checkbox) => checkbox.name === checkbox.label)?.value || ""}
+          onChange={handleCheckboxChange(row.name)}
+        />
     </label>
   </div>
 ))}
