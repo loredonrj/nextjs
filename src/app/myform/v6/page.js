@@ -6,84 +6,23 @@ import React, { useState, useEffect } from 'react';
 
 export default function Form() {
 
-  const [radioBtn1Selected, setRadioBtn1Selected] = useState(false);
-  const [radioBtn2Selected, setRadioBtn2Selected] = useState(false);
-  const [input3Value, setInput3Value] = useState('');
-  const [checkbox4Checked, setCheckbox4Checked] = useState(false);
-  const [checkboxes, setCheckboxes] = useState([
-    { label: 'a', checked: false },
-    { label: 'b', checked: false },
-    { label: 'c', checked: false },
-    { label: 'd', checked: false },
+  const [radioBtn, setRadioBtn] = useState([
+    { id:1, selected: false},
+    { id:2, selected: false}
   ]);
 
   const [rows, setRows] = useState([
-    { checked: false, label: 'a', input: '' },
-    { checked: false, label: 'b', input: '' },
-    { checked: false, label: 'c', input: '' },
-    { checked: false, label: 'd', input: '' }
+    { id:1, checked: false, label: 'a', input: '', sameForAllInput:false, selectAll:false, particular:false },
+    { id:2, checked: false, label: 'b', input: '', sameForAllInput:false, selectAll:false, particular:false },
+    { id:3, checked: false, label: 'c', input: '', sameForAllInput:false, selectAll:false, particular:false },
+    { id:4, checked: false, label: 'd', input: '', sameForAllInput:false, selectAll:false, particular:false }
   ]);
 
   let [selectedRows, setSelectedRows] = useState([]);
 
-  // "Set Same for All" Handler
-  const handleRadioBtn1Change = () => {
-    setRadioBtn1Selected(true);
-    setRadioBtn2Selected(false);
-    setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, checked: true })));
-    setSelectedRows(rows);
-  };
+  // Handlers
 
-  // "Set Particular" Handler
-  const handleRadioBtn2Change = () => {
-    setRadioBtn1Selected(false);
-    setRadioBtn2Selected(true);
-    setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, checked: false })));
-    setSelectedRows([]);
-  };
-
-  // Input3 Value Change Handler
-  const handleInput3Change = (e) => {
-    setInput3Value(e.target.value);
-    setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, input: e.target.value })));
-    setRows(rows.map((row) => ({ ...row, input: e.target.value })));
-  };
-
-    // Select All Checkbox Change Handler
-  const handleCheckbox4Change = (e) => {
-    const checked = e.target.checked;
-    setCheckbox4Checked(checked);
-    setCheckboxes(checkboxes.map((checkbox) => ({ ...checkbox, checked: checked })));
-    if (checked) {
-      setSelectedRows(rows);
-      console.log(
-        selectedRows.map((row) => ({ name: row.name, value: row.input.toUpperCase() }))
-      );
-    } else {
-      setSelectedRows([]);
-      console.clear();
-    }
-  };
-
-  // Checkbox Change Handler for Row_1, Row_2, Row_3, Row_4
-  const handleCheckboxChange = (label) => (e) => {
-    const checked = e.target.checked;
-    const updatedCheckboxes = checkboxes.map((checkbox) =>
-      checkbox.label === label ? { ...checkbox, checked: checked } : checkbox
-    );
-    setCheckboxes(updatedCheckboxes);
-
-    if (checked) {
-      const selectedRow = rows.find((row) => row.name === label);
-      setSelectedRows([...selectedRows, selectedRow]);
-      if (selectedRow.input) {
-        console.log({ name: selectedRow.name, value: selectedRow.input.toUpperCase() });
-      }
-    } else {
-      setSelectedRows(selectedRows.filter((row) => row.name !== label));
-      console.clear();
-    }
-  };
+  /* Return JSX Example
 
   return (
     <div>
@@ -122,8 +61,8 @@ export default function Form() {
         <label>
           <input
             type="checkbox"
-            checked={checkbox4Checked}
-            onChange={handleCheckbox4Change}
+            checked={}
+            onChange={}
           />
           Select All
         </label>
@@ -134,19 +73,19 @@ export default function Form() {
     <label>
       <input
         type="checkbox"
-        checked={checkboxes.find((checkbox) => checkbox.label === row.name)?.checked || false}
-        onChange={handleCheckboxChange(row.name)}
+        checked={}
+        onChange={}
       />
-      {row.name}
+      {row.label}
       <input
           type="text"
-          disabled= {checkboxes.find((checkbox) => checkbox.label === row.name)?.checked || false}
-          value={checkboxes.find((checkbox) => checkbox.name === checkbox.label)?.value || ""}
-          onChange={handleCheckboxChange(row.name)}
+          disabled= {}
+          value={}
+          onChange={}
         />
     </label>
   </div>
 ))}
     </div>
-  );
-}
+);
+*/
