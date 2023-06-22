@@ -2,25 +2,26 @@
 
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Form() {
+
   const [radioBtn1Selected, setRadioBtn1Selected] = useState(false);
   const [radioBtn2Selected, setRadioBtn2Selected] = useState(false);
   const [input3Value, setInput3Value] = useState('');
   const [checkbox4Checked, setCheckbox4Checked] = useState(false);
   const [checkboxes, setCheckboxes] = useState([
-    { label: 'a', input: '', checked: false },
-    { label: 'b', input: '', checked: false },
-    { label: 'c', input: '', checked: false },
-    { label: 'd', input: '', checked: false },
+    { label: 'a', checked: false },
+    { label: 'b', checked: false },
+    { label: 'c', checked: false },
+    { label: 'd', checked: false },
   ]);
 
   const [rows, setRows] = useState([
-    { name: 'A', id: 1, input: '' },
-    { name: 'B', id: 2, input: '' },
-    { name: 'C', id: 3, input: '' },
-    { name: 'D', id: 4, input: '' },
+    { checked: false, label: 'a', input: '' },
+    { checked: false, label: 'b', input: '' },
+    { checked: false, label: 'c', input: '' },
+    { checked: false, label: 'd', input: '' }
   ]);
 
   let [selectedRows, setSelectedRows] = useState([]);
