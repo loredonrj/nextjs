@@ -11,11 +11,19 @@ export default function Form() {
     { id:2, selected: false}
   ]);
 
+  const [sameForAllInput, setSameForAllInput] =  useState([
+    { isRendered: false, hasValue:false, value :''},
+  ]);
+
+  const [selectAll, setSelectAll] =  useState([
+    { checked: false},
+  ]);
+
   const [rows, setRows] = useState([
-    { id:1, checked: false, label: 'a', input: '', sameForAllInput:false, selectAll:false, particular:false },
-    { id:2, checked: false, label: 'b', input: '', sameForAllInput:false, selectAll:false, particular:false },
-    { id:3, checked: false, label: 'c', input: '', sameForAllInput:false, selectAll:false, particular:false },
-    { id:4, checked: false, label: 'd', input: '', sameForAllInput:false, selectAll:false, particular:false }
+    { id:1, checked: false, label: 'a', sameForAllValue: sameForAllInput.value, particularValue:'' },
+    { id:2, checked: false, label: 'b', sameForAllValue: sameForAllInput.value, particularValue:'' },
+    { id:3, checked: false, label: 'c', sameForAllValue: sameForAllInput.value, particularValue:'' },
+    { id:4, checked: false, label: 'd', sameForAllValue: sameForAllInput.value, particularValue:'' }
   ]);
 
   let [selectedRows, setSelectedRows] = useState([]);
