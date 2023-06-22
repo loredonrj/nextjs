@@ -2,7 +2,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from "react";
 
-const Form = () => {
+export default function Form () {
   const [isSameForAll, setIsSameForAll] = useState(false);
   const [isParticular, setIsParticular] = useState(false);
   const [enterSameValue, setEnterSameValue] = useState("");
@@ -119,13 +119,9 @@ const Form = () => {
     }
   }, [isSameForAll, enterSameValue]);
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    console.log(componentValues);
-  };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form>
       <div>
         <label>
           <input
@@ -244,7 +240,6 @@ const Form = () => {
           readOnly
         />
       </div>
-      <button type="submit">Submit</button>
     </form>
   );
 };

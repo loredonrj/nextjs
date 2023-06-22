@@ -119,7 +119,7 @@ const Form = () => {
               setComponent2Selected(false);
             }}
           />
-          Component 1
+          Set Same for All
         </label>
       </div>
       <div>
@@ -133,7 +133,7 @@ const Form = () => {
               setComponent2Selected(true);
             }}
           />
-          Component 2
+         Set Particular
         </label>
       </div>
       {component1Selected && (

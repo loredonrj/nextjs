@@ -72,6 +72,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const Form = () => {
   // State variables
   const [isSameForAll, setIsSameForAll] = useState(true);
+  const [isParticular, setIsParticular] = useState(false);
   const [enterSameValue, setEnterSameValue] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [componentValues, setComponentValues] = useState([
@@ -85,7 +86,14 @@ const Form = () => {
   // Ref to store the previous state of isSameForAll
   const isParticularRef = useRef(isSameForAll);
 
-  // useEffect to handle changes in isSameForAll, enterSameValue, and selectAll
+  // useEffect to handle changes in isSameForAll, isParticuler, enterSameValue, and selectAll
+
+  useEffect(() => {
+    if (isParticular) {
+      setEnterSameValue("");
+    }
+  }, [isParticular]);
+
   useEffect(() => {
     if (isSameForAll) {
       // Set enterSameValue to componentValues
@@ -151,8 +159,9 @@ const Form = () => {
       <label>
         <input
           type="radio"
+          name="radiobtn"
           checked={isSameForAll}
-          onChange={() => setIsSameForAll(true)}
+          onChange={() => setIsSameForAll(!isParticular)}
         />
         Set Same for All
       </label>
@@ -161,11 +170,9 @@ const Form = () => {
       <label>
         <input
           type="radio"
-          checked={!isSameForAll}
-          onChange={() => {
-            setIsSameForAll(false);
-            handleParticularChange();
-          }}
+          name="radiobtn"
+          checked={isParticular}
+          onChange={() => setIsParticular(!isSameForAl)}
         />
         Set Particular
       </label>
