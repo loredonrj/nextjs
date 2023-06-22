@@ -12,9 +12,17 @@ const Form = () => {
   // State for cbSelectAll Checkbox
   const [cbSelectAllChecked, SetCbSelectAllChecked] = useState(false);
 
-  // State for RowA input and checkbox fields
+  // State for RowA
   const [checkBoxA, SetCheckboxA] = useState({ input_type:'checkbox', name: "a",  label:'a', checked: false, value: '' });
   const [textBoxA, SettextBoxA] = useState({ input_type: 'textbox', name: "a", value: '' });
+
+  // State for RowB
+  const [checkBoxB, SetCheckboxB] = useState({ input_type:'checkbox', name: "b",  label:'b', checked: false, value: '' });
+  const [textBoxB, SettextBoxB] = useState({ input_type: 'textbox', name: "b", value: '' });
+
+  // State for RowC
+    const [checkBoxC, SetCheckboxC] = useState({ input_type:'checkbox', name: "c",  label:'c', checked: false, value: '' });
+    const [textBoxC, SettextBoxC] = useState({ input_type: 'textbox', name: "c", value: '' });
 
 
   // State for Textarea
