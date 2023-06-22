@@ -1,75 +1,98 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Form() {
-  const [radioBtn1Selected, setRadioBtn1Selected] = useState(false);
-  const [radioBtn2Selected, setRadioBtn2Selected] = useState(false);
-  const [input3Value, setInput3Value] = useState('');
-  const [checkbox4Checked, setCheckbox4Checked] = useState(false);
-  const [checkboxes, setCheckboxes] = useState([
-    { label: 'a', checked: false },
-    { label: 'b', checked: false },
-    { label: 'c', checked: false },
-    { label: 'd', checked: false },
+  const [radioBtn, setRadioBtn] = useState([
+    { id: 1, selected: false },
+    { id: 2, selected: false }
   ]);
-  const [selectedRows, setSelectedRows] = useState([]);
 
-  // "Set Same for All" Handler
-  const handleRadioBtn1Change = () => {
-    setRadioBtn1Selected(true);
-    setRadioBtn2Selected(false);
-  };
+  const [sameForAllInput, setSameForAllInput] = useState('');
+  const [selectAll, setSelectAll] = useState(false);
+  const [rows, setRows] = useState([
+    { id: 1, checked: false, label: 'Row 1', particularValue: '' },
+    { id: 2, checked: false, label: 'Row 2', particularValue: '' },
+    { id: 3, checked: false, label: 'Row 3', particularValue: '' },
+    { id: 4, checked: false, label: 'Row 4', particularValue: '' }
+  ]);
 
-  // "Set Particular" Handler
-  const handleRadioBtn2Change = () => {
-    setRadioBtn1Selected(false);
-    setRadioBtn2Selected(true);
-  };
+  useEffect(() => {
+    if (radioBtn[0].selected) {
+      setRows((prevRows) =>
+        prevRows.map((row) => ({
+          ...row,
+          particularValue: sameForAllInput
+        }))
+      );
+    }
+  }, [sameForAllInput, radioBtn]);
 
-  // Input3 Value Change Handler
-  const handleInput3Change = (e) => {
-    const inputValue = e.target.value;
-    setInput3Value(inputValue);
-  };
+  const handleRadioBtnChange = (event) => {
+    const value = parseInt(event.target.value);
+    const updatedRadioBtn = radioBtn.map((btn) => ({
+      ...btn,
+      selected: btn.id === value
+    }));
+    setRadioBtn(updatedRadioBtn);
 
-  // Checkbox4 Change Handler
-  const handleCheckbox4Change = (e) => {
-    const checked = e.target.checked;
-    setCheckbox4Checked(checked);
-
-    if (checked) {
-      setSelectedRows(checkboxes);
-      const selectedRowValues = checkboxes
-        .filter((checkbox) => checkbox.checked)
-        .map((checkbox) => ({ name: checkbox.label, value: input3Value.toUpperCase() }));
-      console.log(selectedRowValues);
-    } else {
-      setSelectedRows([]);
-      console.clear();
+    if (value === 2) {
+      setSameForAllInput('');
     }
   };
 
-// Checkbox Change Handler for Row_1, Row_2, Row_3, Row_4
-const handleCheckboxChange = (label) => (e) => {
-    const checked = e.target.checked;
-    const updatedCheckboxes = checkboxes.map((checkbox) =>
-      checkbox.label === label ? { ...checkbox, checked: checked } : checkbox
+  const handleInput3Change = (event) => {
+    setSameForAllInput(event.target.value);
+    if (radioBtn[0].selected) {
+      setRows((prevRows) =>
+        prevRows.map((row) => ({
+          ...row,
+          particularValue: event.target.value
+        }))
+      );
+    }
+  };
+
+  const handleCheckboxChange = (event, rowId) => {
+    const checked = event.target.checked;
+    setRows((prevRows) =>
+      prevRows.map((row) =>
+        row.id === rowId ? { ...row, checked } : row
+      )
     );
-    setCheckboxes(updatedCheckboxes);
-  
-    if (checked) {
-      const selectedRow = checkboxes.find((row) => row.label === label);
-      setSelectedRows((prevRows) => [...prevRows, selectedRow]);
-  
-      if (input3Value) {
-        console.log({ name: selectedRow.label, value: input3Value.toUpperCase() });
-      }
-    } else {
-      setSelectedRows((prevRows) => prevRows.filter((row) => row.label !== label));
-      console.clear();
-    }
   };
-  
+
+  const handleInputChange = (event, rowId) => {
+    const value = event.target.value;
+    setRows((prevRows) =>
+      prevRows.map((row) =>
+        row.id === rowId ? { ...row, particularValue: value } : row
+      )
+    );
+  };
+
+  const handleSelectAllChange = (event) => {
+    const checked = event.target.checked;
+    setSelectAll(checked);
+    setRows((prevRows) =>
+      prevRows.map((row) => ({ ...row, checked }))
+    );
+  };
+
+  const handleRowCheckboxChange = (event, row) => {
+    const checked = event.target.checked;
+    setRows((prevRows) =>
+      prevRows.map((r) => (r.id === row.id ? { ...r, checked } : r))
+    );
+  };
+
+  const handleRowInputChange = (event, row) => {
+    const value = event.target.value;
+    setRows((prevRows) =>
+      prevRows.map((r) =>
+        r.id === row.id ? { ...r, particularValue: value } : r
+      )
+    );
+  };
 
   return (
     <div>
@@ -77,62 +100,66 @@ const handleCheckboxChange = (label) => (e) => {
         <label>
           <input
             type="radio"
-            checked={radioBtn1Selected}
-            onChange={handleRadioBtn1Change}
+            checked={radioBtn[0].selected}
+            onChange={handleRadioBtnChange}
+            value={radioBtn[0].id}
           />
           Set Same for All
         </label>
-        <br />
         <label>
           <input
             type="radio"
-            checked={radioBtn2Selected}
-            onChange={handleRadioBtn2Change}
+            checked={radioBtn[1].selected}
+            onChange={handleRadioBtnChange}
+            value={radioBtn[1].id}
           />
-          Set Particular
+          Set Different for Each
         </label>
       </div>
-
-      {radioBtn1Selected && (
+      {radioBtn[0].selected && (
         <div>
-          <label>Enter same value:</label>
-          <input
-            type="text"
-            value={input3Value}
-            onChange={handleInput3Change}
-          />
-        </div>
-      )}
-
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={checkbox4Checked}
-            onChange={handleCheckbox4Change}
-          />
-          Select All
-        </label>
-      </div>
-
-      {checkboxes.map((checkbox) => (
-        <div key={checkbox.label}>
           <label>
-            <input
-              type="checkbox"
-              checked={checkbox.checked}
-              onChange={handleCheckboxChange(checkbox.label)}
-            />
-            {checkbox.label}
+            Input 3:
             <input
               type="text"
-              disabled={!checkbox.checked}
-              value={checkbox.checked ? input3Value : ''}
+              value={sameForAllInput}
               onChange={handleInput3Change}
             />
           </label>
         </div>
-      ))}
+      )}
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={selectAll}
+            onChange={handleSelectAllChange}
+          />
+          Select All
+        </label>
+      </div>
+      <div>
+        {rows.map((row) => (
+          <div key={row.id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={row.checked}
+                onChange={(event) => handleRowCheckboxChange(event, row)}
+              />
+              {row.label}:
+              <input
+                type="text"
+                disabled={!row.checked}
+                value={row.checked ? row.particularValue : ''}
+                onChange={(event) => handleRowInputChange(event, row)}
+              />
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
+
+
