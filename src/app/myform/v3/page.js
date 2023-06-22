@@ -150,7 +150,7 @@ const Form = () => {
         <label>
           <input
             type="checkbox"
-            checked={component4Selected}
+            checked={component1Selected || component2Selected }
             onChange={(e) => setComponent4Selected(e.target.checked)}
             disabled={component2Selected}
           />
@@ -165,7 +165,7 @@ const Form = () => {
             onChange={(e) => setComponent5Checked(e.target.checked)}
             disabled={!component4Selected}
           />
-          a
+          a 
         </label>
         <input
           type="text"

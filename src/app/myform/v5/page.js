@@ -1,11 +1,12 @@
 
-////myform/v5 (Inspired from Navdeep implemetation)
+////myform/v5 (from Navdeep's implementation)
+
 'use client'
 import React, { useState} from 'react';
 
-import Checkbox from '@/app/components/forms/checkbox';
+import CustomCheckbox from '@/app/components/forms/checkbox';
 
-import Input from '@/app/components/forms/input';
+import CustomInput from '@/app/components/forms/input';
 
 export default function Form() {
 
@@ -105,13 +106,14 @@ const handleParticularRowValue = (e, id) => {
             );
             const constant = hasInputValue
                 ? inputValue
-                : selectedRows[findIndex]?.input;
+                : selectedRows[findIndex]?.input;)
+
 
     return (
         <div key={index}>
 
             <div>
-                <Checkbox
+                <CustomCheckbox
                     isChecked={selectedRows.some(
                         (el) => el.id === item?.id
                     )}
@@ -120,7 +122,7 @@ const handleParticularRowValue = (e, id) => {
                     }}
                 />
             {item?.name}
-            <Input
+            <CustomInput
                 value={constant}
                 disabled={
                     !hasInputValue &&
@@ -139,4 +141,4 @@ const handleParticularRowValue = (e, id) => {
             </div>
         </div>
     );
-              }}}}}
+}

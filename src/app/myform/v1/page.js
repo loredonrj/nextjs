@@ -33,7 +33,7 @@ export default function Form () {
 
   useEffect(() => {
     if (selectAll) {
-      setIsSameForAll(true);
+      setIsSameForAll(false);
       setIsParticular(false);
       setEnterSameValue("");
     }

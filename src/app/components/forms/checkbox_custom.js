@@ -1,6 +1,6 @@
-// component for checkbox input
+// Create component for checkbox input
 export default function CustomCheckbox (props) {
-    const {htmlFor,label,id,name,value,required,type,isChecked} = props;
+    const {htmlFor,label,id,name,value,required,type} = props;
      return (
       <>
        <label
@@ -13,7 +13,6 @@ export default function CustomCheckbox (props) {
          value={value || null}
          required={required || null}
          type='checkbox'
-         isChecked={isChecked}
         />
         {label}
        </label>
