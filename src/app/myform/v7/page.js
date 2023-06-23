@@ -159,16 +159,21 @@ console.log(selectedRows);
             <label>
               <input
                 type="checkbox"
-                checked={row.checked}
-                onChange={(event) => handleRowCheckboxChange(event, row)}
+                checked={selectedRows.some((el) => el.id === item?.id)}
+                onChange={(e) => {selectParticular(e, item?.id);}}
               />
               {row.label}
               <input
                 type="text"
-                disabled={row.disabled}
+                disabled={!hasInputValue && selectedRows.some((el) => 
+                  el.id === item?.id) === true
+                      ? false
+                      : hasInputValue
+                      ? true
+                      : true
+              }
                 value={row.checked ? row.value : sameForAllInput}
-                onChange={(event) => {handleParticular(event, item?.id);
-                }}
+                onChange={(e) => {handleParticularRowValue(e, item?.id)}}
               />
             </label>
           </div>
