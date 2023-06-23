@@ -11,10 +11,10 @@ export default function Form() {
   const [sameForAllInput, setSameForAllInput] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [rows, setRows] = useState([
-    { id: 1, checked: false, label: 'a', hasInputValue: true, value: '' },
-    { id: 2, checked: false, label: 'b', hasInputValue: true, value: '' },
-    { id: 3, checked: false, label: 'c', hasInputValue: true, value: '' },
-    { id: 4, checked: false, label: 'd', hasInputValue: true, value: '' }
+    { id: 1, label: 'a', hasInputValue: true, value: '' },
+    { id: 2, label: 'b', hasInputValue: true, value: '' },
+    { id: 3, label: 'c', hasInputValue: true, value: '' },
+    { id: 4, label: 'd', hasInputValue: true, value: '' }
   ]);
 
   const [hasInputValue, setHasInputValue] = useState(true);
@@ -58,7 +58,7 @@ export default function Form() {
   };
 
 const selectParticular = (event, id) =>{
-  if ((radioBtn[1].selected)){
+  if (event.detail.checked){
     const findRow = rows?.filter((el) => el.id === id);
     const newRowData = [];
     newRowData.push(...selectedRows, {
@@ -90,21 +90,6 @@ const selectParticular = (event, id) =>{
 
 console.log(selectedRows);
 
-  const handleRowCheckboxChange = (event, row) => {
-    const checked = event.target.checked;
-    setRows((prevRows) =>
-      prevRows.map((row) => (row.id === row.id ? { ...row, checked } : row))
-    );
-  };
-
-  const handleRowInputChange = (event, row) => {
-    const value = event.target.value;
-    setRows((prevRows) =>
-      prevRows.map((r) =>
-        r.id === row.id ? { ...r, value: value } : r
-      )
-    );
-  };
 
   return (
     <div>
@@ -174,7 +159,7 @@ console.log(selectedRows);
                       : true
               }
                 value={row.checked ? row.value : sameForAllInput}
-                onChange={(e) => {handleParticularRowValue(e, item?.id)}}
+                onChange={(e) => {printParticularRowValue(e, item?.id)}}
               />
             </label>
           </div>
