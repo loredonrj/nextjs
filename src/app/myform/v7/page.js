@@ -11,12 +11,13 @@ export default function Form() {
   const [sameForAllInput, setSameForAllInput] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [rows, setRows] = useState([
-    { id: 1, checked: false, label: 'a', disabled: false, value: '' },
-    { id: 2, checked: false, label: 'b', disabled: false, value: '' },
-    { id: 3, checked: false, label: 'c', disabled: false, value: '' },
-    { id: 4, checked: false, label: 'd', disabled: false, value: '' }
+    { id: 1, checked: false, label: 'a', hasInputValue: true, value: '' },
+    { id: 2, checked: false, label: 'b', hasInputValue: true, value: '' },
+    { id: 3, checked: false, label: 'c', hasInputValue: true, value: '' },
+    { id: 4, checked: false, label: 'd', hasInputValue: true, value: '' }
   ]);
 
+  const [hasInputValue, setHasInputValue] = useState(true);
   let [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
