@@ -10,18 +10,20 @@ export default function Form() {
   const [sameForAllInput, setSameForAllInput] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [rows, setRows] = useState([
-    { id: 1, checked: false, label: 'Row 1', particularValue: '' },
-    { id: 2, checked: false, label: 'Row 2', particularValue: '' },
-    { id: 3, checked: false, label: 'Row 3', particularValue: '' },
-    { id: 4, checked: false, label: 'Row 4', particularValue: '' }
+    { id: 1, checked: false, label: 'Row 1', disabled: false, value: '' },
+    { id: 2, checked: false, label: 'Row 2', disabled: false, value: '' },
+    { id: 3, checked: false, label: 'Row 3', disabled: false, value: '' },
+    { id: 4, checked: false, label: 'Row 4', disabled: false, value: '' }
   ]);
+
+  let [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
     if (radioBtn[0].selected) {
       setRows((prevRows) =>
         prevRows.map((row) => ({
           ...row,
-          particularValue: sameForAllInput
+          value: sameForAllInput
         }))
       );
     }
@@ -35,39 +37,15 @@ export default function Form() {
     }));
     setRadioBtn(updatedRadioBtn);
 
-    if (value === 2) {
-      setSameForAllInput('');
-    }
   };
 
   const handleInput3Change = (event) => {
     setSameForAllInput(event.target.value);
     if (radioBtn[0].selected) {
       setRows((prevRows) =>
-        prevRows.map((row) => ({
-          ...row,
-          particularValue: event.target.value
-        }))
+        prevRows.map((row) => ({ ...row, value: event.target.value}))
       );
     }
-  };
-
-  const handleCheckboxChange = (event, rowId) => {
-    const checked = event.target.checked;
-    setRows((prevRows) =>
-      prevRows.map((row) =>
-        row.id === rowId ? { ...row, checked } : row
-      )
-    );
-  };
-
-  const handleInputChange = (event, rowId) => {
-    const value = event.target.value;
-    setRows((prevRows) =>
-      prevRows.map((row) =>
-        row.id === rowId ? { ...row, particularValue: value } : row
-      )
-    );
   };
 
   const handleSelectAllChange = (event) => {
@@ -78,10 +56,23 @@ export default function Form() {
     );
   };
 
+const handleParticular = (event, id) =>{
+  if ((radioBtn[1].selected)){
+    const findRow = rows?.filter((el) => el.id === id);
+    const newRowData = [];
+    /*
+    
+    */
+    setRows((prevRows) =>
+    prevRows.map((row) => ({ ...row, disabled: false}))
+      );
+    };
+  }
+
   const handleRowCheckboxChange = (event, row) => {
     const checked = event.target.checked;
     setRows((prevRows) =>
-      prevRows.map((r) => (r.id === row.id ? { ...r, checked } : r))
+      prevRows.map((row) => (row.id === row.id ? { ...row, checked } : row))
     );
   };
 
@@ -89,7 +80,7 @@ export default function Form() {
     const value = event.target.value;
     setRows((prevRows) =>
       prevRows.map((r) =>
-        r.id === row.id ? { ...r, particularValue: value } : r
+        r.id === row.id ? { ...r, value: value } : r
       )
     );
   };
@@ -150,9 +141,10 @@ export default function Form() {
               {row.label}:
               <input
                 type="text"
-                disabled={!row.checked}
-                value={row.checked ? row.particularValue : ''}
-                onChange={(event) => handleRowInputChange(event, row)}
+                disabled={row.disabled}
+                value={row.checked ? row.value : sameForAllInput}
+                onChange={(event) => {handleParticular(event, item?.id);
+                }}
               />
             </label>
           </div>
