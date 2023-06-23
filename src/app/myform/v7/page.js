@@ -72,30 +72,22 @@ const selectParticular = (event, id) =>{
 
   };
 
-  /*
-  const handleParticularRowValue = (e, id) => {
+  const printParticularRowValue = (e, id) => {
+
     if (selectedRows.length <= 0) {
-
-    for (let i = 0; i < rows?.length; i++) {
-
-        const findIndex = selectedRows.findIndex(
-            (el) => el.id === id
-        );
-        
-        const data = selectedRows;
-
-        const row = data[findIndex];
-
-        row.input = Number(e.target.value);
-
-        setSelectedRows([...data]);
-        }
-    }
-};
-
+     for (let i = 0; i < rows?.length; i++) {
+      const findIndex = selectedRows.findIndex(
+       (el) => el.id === id
+        );
+        const data = selectedRows;
+        const row = data[findIndex];
+        row.input = Number(e.target.value);
+        setSelectedRows([...data]);
+         }
+        }
+    };
 
 console.log(selectedRows);
-  */
 
   const handleRowCheckboxChange = (event, row) => {
     const checked = event.target.checked;
