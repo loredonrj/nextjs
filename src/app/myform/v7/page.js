@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function Form() {
+
   const [radioBtn, setRadioBtn] = useState([
     { id: 1, selected: false },
     { id: 2, selected: false }
@@ -36,7 +37,6 @@ export default function Form() {
       selected: btn.id === value
     }));
     setRadioBtn(updatedRadioBtn);
-
   };
 
   const handleInput3Change = (event) => {
@@ -61,13 +61,18 @@ const handleParticular = (event, id) =>{
     const findRow = rows?.filter((el) => el.id === id);
     const newRowData = [];
     /*
-    
+    newRowData.push(...selectedRows, {
+      id: findRow[0]?.id,
+      input: value ? String(inputValue) : '',
+      });
+      setSelectedRows(newRowData);
+    } else {
+      const data = selectedRows?.filter((i) => i.id !== id);
+      setSelectedRows(data);
+    }
     */
-    setRows((prevRows) =>
-    prevRows.map((row) => ({ ...row, disabled: false}))
-      );
-    };
-  }
+
+  };
 
   const handleRowCheckboxChange = (event, row) => {
     const checked = event.target.checked;
