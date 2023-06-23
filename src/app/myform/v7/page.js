@@ -11,10 +11,10 @@ export default function Form() {
   const [sameForAllInput, setSameForAllInput] = useState('');
   const [selectAll, setSelectAll] = useState(false);
   const [rows, setRows] = useState([
-    { id: 1, checked: false, label: 'Row 1', disabled: false, value: '' },
-    { id: 2, checked: false, label: 'Row 2', disabled: false, value: '' },
-    { id: 3, checked: false, label: 'Row 3', disabled: false, value: '' },
-    { id: 4, checked: false, label: 'Row 4', disabled: false, value: '' }
+    { id: 1, checked: false, label: 'a', disabled: false, value: '' },
+    { id: 2, checked: false, label: 'b', disabled: false, value: '' },
+    { id: 3, checked: false, label: 'c', disabled: false, value: '' },
+    { id: 4, checked: false, label: 'd', disabled: false, value: '' }
   ]);
 
   let [selectedRows, setSelectedRows] = useState([]);
@@ -56,11 +56,10 @@ export default function Form() {
     );
   };
 
-const handleParticular = (event, id) =>{
+const selectParticular = (event, id) =>{
   if ((radioBtn[1].selected)){
     const findRow = rows?.filter((el) => el.id === id);
     const newRowData = [];
-    /*
     newRowData.push(...selectedRows, {
       id: findRow[0]?.id,
       input: value ? String(inputValue) : '',
@@ -70,9 +69,33 @@ const handleParticular = (event, id) =>{
       const data = selectedRows?.filter((i) => i.id !== id);
       setSelectedRows(data);
     }
-    */
 
   };
+
+  /*
+  const handleParticularRowValue = (e, id) => {
+    if (selectedRows.length <= 0) {
+
+    for (let i = 0; i < rows?.length; i++) {
+
+        const findIndex = selectedRows.findIndex(
+            (el) => el.id === id
+        );
+        
+        const data = selectedRows;
+
+        const row = data[findIndex];
+
+        row.input = Number(e.target.value);
+
+        setSelectedRows([...data]);
+        }
+    }
+};
+
+
+console.log(selectedRows);
+  */
 
   const handleRowCheckboxChange = (event, row) => {
     const checked = event.target.checked;
@@ -93,6 +116,7 @@ const handleParticular = (event, id) =>{
   return (
     <div>
       <div>
+        <div>
         <label>
           <input
             type="radio"
@@ -102,6 +126,8 @@ const handleParticular = (event, id) =>{
           />
           Set Same for All
         </label>
+        </div>
+        <div>
         <label>
           <input
             type="radio"
@@ -109,8 +135,9 @@ const handleParticular = (event, id) =>{
             onChange={handleRadioBtnChange}
             value={radioBtn[1].id}
           />
-          Set Different for Each
+          Set Particular
         </label>
+        </div>
       </div>
       {radioBtn[0].selected && (
         <div>
@@ -143,7 +170,7 @@ const handleParticular = (event, id) =>{
                 checked={row.checked}
                 onChange={(event) => handleRowCheckboxChange(event, row)}
               />
-              {row.label}:
+              {row.label}
               <input
                 type="text"
                 disabled={row.disabled}
