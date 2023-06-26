@@ -5,7 +5,7 @@ import CustomCheckbox from "src/app/components/forms/checkbox_custom.js";
 import CustomInput from "src/app/components/forms/input_custom.js";
 export default function Form() {
   const [selectAll, setSelectAll] = useState(true);
-  const [isFlatPayout, setIsFlatPayout] = useState(true); //isFlatPayout = isSameValueForAll (bool)
+  const [isFlatPayout, setIsFlatPayout] = useState(true); //isFlatPayout = isSameValueForAll (bool) - payout= particular percentage = value
   const [flatValue, setFlatValue] = useState(""); //flatValue = sameValueforall (number or string)
 
   const [subProducts, setSubProducts] = useState([
@@ -60,9 +60,9 @@ export default function Form() {
     }
   };
 
-  // Set Treshold value (this is not the value the user will enter inside the input field!! it some requirement on the value entered if necessary)
+  // Handles the value (percentage, payout) the user will enter inside the input field. it some requirement on the value entered if necessary)
 
-  const setTresholdValue = (val) => {
+  const setTresholdValue = (val) => { //
     if (selectedSubProducts.length <= 0) {
       console.log("error msg: Please select Subproducts first");
     }
