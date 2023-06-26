@@ -1,13 +1,12 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CustomCheckbox from "src/app/components/forms/checkbox_custom.js";
 import CustomInput from "src/app/components/forms/input_custom.js";
 export default function Form() {
-
   const [selectAll, setSelectAll] = useState(true);
-  const [isFlatPayout, setIsFlatPayout] = useState(true);
-  const [flatValue, setFlatValue] = useState('');
+  const [isFlatPayout, setIsFlatPayout] = useState(true); //isFlatPayout = isSameValueForAll (bool)
+  const [flatValue, setFlatValue] = useState(""); //flatValue = sameValueforall (number or string)
 
   const [subProducts, setSubProducts] = useState([
     {
@@ -30,6 +29,17 @@ export default function Form() {
 
   let [selectedSubProducts, setSelectedSubProducts] = useState([]);
 
+  //Get subproducts list
+
+  useEffect(() => {
+    getSubProductsList();
+  }, []);
+
+  const getSubProductsList = () => {
+    //define function to get subproducts list
+    return;
+  };
+
   // select all
   const handleBulkSelect = () => {
     if (selectAll) {
@@ -39,7 +49,7 @@ export default function Form() {
         );
         return {
           sub_product_id: el?.id,
-          percentage: flatValue
+          percentage: flatValue //percentage = payout = value entered in individual row input field
             ? Number(flatValue)
             : selectedSubProducts[findIndex]?.percentage,
         };
@@ -50,36 +60,51 @@ export default function Form() {
     }
   };
 
+  // Set Treshold value (this is not the value the user will enter inside the input field!! it some requirement on the value entered if necessary)
 
-  // this is to manager for particulars
+  const setTresholdValue = (val) => {
+    if (selectedSubProducts.length <= 0) {
+      console.log("error msg: Please select Subproducts first");
+    }
+    for (let i = 0; i < subProducts?.length; i++) {
+      if (val > subProducts[i].threshold) {
+        console.log(
+          "error msg: Threshold value should be less than subproduct threshold"
+        );
+        break;
+      }
+    }
+    selectedSubProducts.forEach((item, index) => {
+      selectedSubProducts[index].percentage = val ? Number(val) : flatValue;
+    });
+  };
+
+  // this is to manage particular rows (subproduct) (a, b, c, d)
 
   const handleParticularProduct = (e, id) => {
+    //actually handleParticularSubProduct!
     if (e.detail.checked) {
       const findProduct = subProducts?.filter((el) => el.id === id);
       const newProductData = [];
       newProductData.push(...selectedSubProducts, {
         sub_product_id: findProduct[0]?.id,
-        percentage: flatValue ? Number(flatValue) : '',
+        percentage: flatValue ? Number(flatValue) : "",
       });
       setSelectedSubProducts(newProductData);
     } else {
-      const data = selectedSubProducts?.filter(
-        (i) => i.sub_product_id !== id
-      );
+      const data = selectedSubProducts?.filter((i) => i.sub_product_id !== id);
       setSelectedSubProducts(data);
     }
   };
 
-
-
-
   const handleParticalProductPayout = (e, id) => {
+    // this handles the individual row(subproduct)'s value (payout) of the input fields a, b, c, d
     if (selectedSubProducts.length <= 0) {
-      console.log('error msg');
+      console.log("error msg");
     }
     for (let i = 0; i < subProducts?.length; i++) {
       if (e.target.value > subProducts[i].threshold) {
-        console.log('error msg');
+        console.log("error msg");
         break;
       }
     }
@@ -91,15 +116,12 @@ export default function Form() {
     row.percentage = Number(e.target.value);
     setSelectedSubProducts([...data]);
   };
+
   console.log(selectedSubProducts);
-
-
 
   //jsx part
 
-
   return (
-      
     subProducts &&
     subProducts?.map((item, index) => {
       const findIndex = selectedSubProducts.findIndex(
@@ -108,43 +130,38 @@ export default function Form() {
       const constant = isFlatPayout
         ? flatValue
         : selectedSubProducts[findIndex]?.percentage;
+
       return (
-        
-      <div
-        key={index}
-        className='d-flex gap-3 align-items-center'
-      >
-        <div className='d-flex w-75 gap-3 align-items-cente'>
-          <CustomCheckbox
-            isChecked={selectedSubProducts.some(
-              (el) => el.sub_product_id === item?.id
-            )}
-            onChange={(e) => {
-              handleParticularProduct(e, item?.id);
-            }}
-          />
-          {item?.sub_product_name}
-        </div>
-        <CustomInput
-          className='w-auto my-0'
-          value={constant}
-          disabled={
-            !isFlatPayout &&
+        <div key={index}>
+          <div>
+            <CustomCheckbox
+              isChecked={selectedSubProducts.some(
+                (el) => el.sub_product_id === item?.id
+              )}
+              onChange={(e) => {
+                handleParticularProduct(e, item?.id);
+              }}
+            />
+            {item?.sub_product_name}
+          </div>
+          <CustomInput
+            value={constant}
+            disabled={
+              !isFlatPayout &&
               selectedSubProducts.some(
                 (el) => el.sub_product_id === item?.id
               ) === true
-              ? false
-              : isFlatPayout
+                ? false
+                : isFlatPayout
                 ? true
                 : true
-          }
-          needSuffixIcon={true}
-          onChange={(e) => {
-            handleParticalProductPayout(e, item?.id);
-          }}
-          suffixText={'%'}
-        />
-      </div>
-    )}
-      )  )
+            }
+            onChange={(e) => {
+              handleParticalProductPayout(e, item?.id);
+            }}
+          />
+        </div>
+      );
+    })
+  );
 };
